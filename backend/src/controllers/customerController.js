@@ -98,3 +98,10 @@ const deleteCustomer = async (req, res) => {
         });
     }
 };
+
+module.exports = {
+    createCustomer,
+    getCustomers,
+    getCustomerById,
+    deleteCustomer,
+};
