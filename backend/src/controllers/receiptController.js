@@ -22,6 +22,10 @@ const receiveReceipt = async (req, res) => {
                     campaign.stats.delivered++;
                     break;
 
+                case "FAILED":
+                    campaign.stats.failed++;
+                    break;
+
                 case "OPENED":
                     campaign.stats.opened++;
                     break;
