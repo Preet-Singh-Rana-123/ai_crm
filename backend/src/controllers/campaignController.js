@@ -8,6 +8,74 @@ const Communication = require("../models/Communication");
 
 const buildSegmentQuery = require("../services/buildSegmentQuery");
 
+const axios = require("axios");
+
+const sendCampaign = async (req, res) => {
+    try {
+        const campaign = await Campaign.findById(req.params.id);
+
+        if (!campaign) {
+            return res.status(404).json({
+                success: false,
+            });
+        }
+
+        const segment = await Segment.findById(campaign.segmentId);
+
+        const query = buildSegmentQuery(segment.rules);
+
+        const audience = await Customer.find(query);
+
+        campaign.status = "SENDING";
+
+        await campaign.save();
+
+        for (const customer of audience) {
+            await Communication.create({
+                campaignId: campaign._id,
+
+                customerId: customer._id,
+
+                channel: campaign.channel,
+
+                status: "SENT",
+            });
+
+            await axios.post(
+                "http://localhost:6000/api/channel/send-message",
+
+                {
+                    campaignId: campaign._id,
+
+                    customerId: customer._id,
+
+                    channel: campaign.channel,
+
+                    message: campaign.message,
+                },
+            );
+        }
+
+        campaign.status = "SENT";
+
+        campaign.stats.sent = audience.length;
+
+        await campaign.save();
+
+        res.json({
+            success: true,
+
+            audience: audience.length,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+
+            message: error.message,
+        });
+    }
+};
+
 const createCampaign = async (req, res) => {
     try {
         const { name, segmentId, message, channel } = req.body;
@@ -100,4 +168,5 @@ module.exports = {
     createCampaign,
     getCampaigns,
     getCampaignById,
+    sendCampaign,
 };

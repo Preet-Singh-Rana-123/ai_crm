@@ -14,4 +14,6 @@ router.get("/", getCampaigns);
 
 router.get("/:id", getCampaignById);
 
+router.post("/:id/send", sendCampaign);
+
 module.exports = router;
