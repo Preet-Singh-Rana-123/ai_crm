@@ -1,5 +1,49 @@
 const Campaign = require("../models/Campaign");
 
+const getOverallAnalytics = async (req, res) => {
+    try {
+        const campaigns = await Campaign.find();
+
+        let sent = 0;
+        let delivered = 0;
+        let opened = 0;
+        let clicked = 0;
+        let failed = 0;
+
+        campaigns.forEach((campaign) => {
+            sent += campaign.stats.sent;
+
+            delivered += campaign.stats.delivered;
+
+            opened += campaign.stats.opened;
+
+            clicked += campaign.stats.clicked;
+
+            failed += campaign.stats.failed;
+        });
+
+        res.json({
+            success: true,
+
+            sent,
+
+            delivered,
+
+            opened,
+
+            clicked,
+
+            failed,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+
+            message: error.message,
+        });
+    }
+};
+
 const getCampaignAnalytics = async (req, res) => {
     try {
         const campaign = await Campaign.findById(req.params.id);
