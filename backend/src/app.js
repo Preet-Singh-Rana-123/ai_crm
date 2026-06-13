@@ -8,6 +8,7 @@ const segmentRoutes = require("./routes/segmentRoutes");
 const campaignRoutes = require("./routes/campaignRoutes");
 const receiptRoutes = require("./routes/receiptRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use("/api/segments", segmentRoutes);
 app.use("/api/campaigns", campaignRoutes);
 app.use("/api/receipts", receiptRoutes);
 app.use("/api/analytics", analyticsRoutes);
+app.use("/api/ai", aiRoutes);
 
 app.get("/", (req, res) => {
     res.json({
