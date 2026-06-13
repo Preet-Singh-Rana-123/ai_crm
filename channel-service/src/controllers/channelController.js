@@ -1,5 +1,11 @@
 const axios = require("axios");
 
+const getRandomStatus = () => {
+    const statuses = ["DELIVERED", "FAILED"];
+
+    return statuses[Math.floor(Math.random() * statuses.length)];
+};
+
 const simulateEvent = async (payload, status, delay) => {
     setTimeout(async () => {
         try {
@@ -19,11 +25,15 @@ const sendMessage = async (req, res) => {
     try {
         const payload = req.body;
 
-        simulateEvent(payload, "DELIVERED", 2000);
+        const firstStatus = getRandomStatus();
 
-        simulateEvent(payload, "OPENED", 5000);
+        simulateEvent(payload, firstStatus, 2000);
 
-        simulateEvent(payload, "CLICKED", 8000);
+        if (firstStatus === "DELIVERED") {
+            simulateEvent(payload, "OPENED", 5000);
+
+            simulateEvent(payload, "CLICKED", 8000);
+        }
 
         res.json({
             success: true,
