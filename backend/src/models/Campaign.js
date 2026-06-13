@@ -34,6 +34,32 @@ const campaignSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        stats: {
+            sent: {
+                type: Number,
+                default: 0,
+            },
+
+            delivered: {
+                type: Number,
+                default: 0,
+            },
+
+            failed: {
+                type: Number,
+                default: 0,
+            },
+
+            opened: {
+                type: Number,
+                default: 0,
+            },
+
+            clicked: {
+                type: Number,
+                default: 0,
+            },
+        },
     },
     {
         timestamps: true,
