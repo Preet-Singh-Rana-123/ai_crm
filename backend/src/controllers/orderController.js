@@ -87,3 +87,9 @@ const getOrderById = async (req, res) => {
         });
     }
 };
+
+module.exports = {
+    createOrder,
+    getOrders,
+    getOrderById,
+};
