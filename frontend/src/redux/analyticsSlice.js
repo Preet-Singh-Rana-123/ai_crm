@@ -18,6 +18,7 @@ const analyticsSlice = createSlice({
     initialState: {
         analytics: {},
         loading: false,
+        error: null,
     },
 
     reducers: {},
@@ -33,6 +34,12 @@ const analyticsSlice = createSlice({
                 state.loading = false;
 
                 state.analytics = action.payload;
+            })
+
+            .addCase(fetchOverviewAnalytics.rejected, (state, action) => {
+                state.loading = false;
+
+                state.error = action.error.message;
             });
     },
 });
