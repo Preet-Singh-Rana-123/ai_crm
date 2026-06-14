@@ -12,7 +12,10 @@ const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://ai-crm-frontend-amyj.onrender.com",
+];
 
 app.use(
     cors({
