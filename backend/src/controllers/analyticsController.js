@@ -93,4 +93,5 @@ const getCampaignAnalytics = async (req, res) => {
 
 module.exports = {
     getCampaignAnalytics,
+    getOverallAnalytics,
 };

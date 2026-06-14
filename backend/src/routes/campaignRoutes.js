@@ -6,6 +6,7 @@ const {
     createCampaign,
     getCampaigns,
     getCampaignById,
+    sendCampaign,
 } = require("../controllers/campaignController");
 
 router.post("/", createCampaign);
