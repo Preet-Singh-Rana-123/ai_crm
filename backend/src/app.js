@@ -12,7 +12,22 @@ const aiRoutes = require("./routes/aiRoutes");
 
 const app = express();
 
-app.use(cors({ credentials: true }));
+const allowedOrigins = ["http://localhost:5173"];
+
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            if (!origin) return callback(null, true);
+
+            if (allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Blocked by CORS policy"));
+            }
+        },
+        credentials: true,
+    }),
+);
 
 app.use(express.json());
 
