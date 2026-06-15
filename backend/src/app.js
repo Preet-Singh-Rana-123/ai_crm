@@ -15,6 +15,7 @@ const app = express();
 const allowedOrigins = [
     "http://localhost:5173",
     "https://ai-crm-frontend-amyj.onrender.com",
+    "https://ai-crm-channel-service-04dg.onrender.com",
 ];
 
 app.use(

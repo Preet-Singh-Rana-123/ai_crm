@@ -42,7 +42,7 @@ const sendCampaign = async (req, res) => {
             });
 
             await axios.post(
-                "http://localhost:6000/api/channel/send-message",
+                "https://ai-crm-channel-service-04dg.onrender.com/api/channel/send-message",
 
                 {
                     campaignId: campaign._id,
