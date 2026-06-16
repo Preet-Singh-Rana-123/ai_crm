@@ -25,7 +25,7 @@ export default function Campaigns() {
 
     const launchCampaign = async (id) => {
         await fetch(
-            `http://localhost:5000/api/campaigns/${id}/send`,
+            `https://ai-crm-backend-72h2.onrender.com/api/campaigns/${id}/send`,
 
             {
                 method: "POST",
